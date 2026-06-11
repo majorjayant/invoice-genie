@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Invoice</title>
+<link rel="stylesheet" href="./app.css" />
+</head>
+<body>
+  <div class="toolbar no-print">
+    <button id="btn-add-item" class="btn btn-primary">+ Add Item</button>
+    <button id="btn-print" class="btn btn-primary">Print / Download PDF</button>
+    <button id="btn-reset" class="btn btn-danger">Reset Invoice</button>
+  </div>
+
+
+  <div class="invoice-wrapper">
+    <div class="invoice-canvas" id="invoice-canvas">
+
+      <!-- Top title band -->
+      <div class="title-band">TAX INVOICE</div>
+
+      <!-- Header grid: company info | meta info -->
+      <div class="header-grid">
+        <div class="company-cell">
+          <h2 contenteditable="true" id="company-name" placeholder="Company Name">Your Company Name</h2>
+          <p contenteditable="true" id="company-address" placeholder="Company Address">123 Business Road, Tech City, State - 100000</p>
+          <p class="muted-line"><span class="lbl">Phone</span> <span contenteditable="true" id="company-phone">+91 00000 00000</span></p>
+          <p class="muted-line"><span class="lbl">Email</span> <span contenteditable="true" id="company-email">hello@company.com</span></p>
+          <p class="muted-line"><span class="lbl">GSTIN</span> <span contenteditable="true" id="company-gstin">22AAAAA0000A1Z5</span></p>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-row">
+            <div class="meta-key">Invoice Number</div>
+            <div class="meta-val" contenteditable="true" id="invoice-number">INV-001</div>
+          </div>
+          <div class="meta-row">
+            <div class="meta-key">Invoice Date</div>
+            <div class="meta-val" contenteditable="true" id="invoice-date">01-Jan-2025</div>
+          </div>
+          <div class="meta-row">
+            <div class="meta-key">Place of Supply</div>
+            <div class="meta-val" contenteditable="true" id="place-supply">State Name</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Billed to row -->
+      <div class="billed-to-box">
+        <div class="section-label">Billed To</div>
+        <p contenteditable="true" id="customer-name" class="bold">Customer Name</p>
+        <p contenteditable="true" id="customer-address">456 Buyer Lane, Commerce City, State - 200000</p>
+        <p class="muted-line"><span class="lbl">Phone</span> <span contenteditable="true" id="customer-phone">+91 00000 00000</span></p>
+        <p class="muted-line"><span class="lbl">GSTIN</span> <span contenteditable="true" id="customer-gstin">Optional</span></p>
+      </div>
+
+      <!-- Items table -->
+      <table class="items-table">
+        <thead>
+          <tr>
+            <th style="width:36px">#</th>
+            <th>Description</th>
+            <th style="width:70px">HSN/SAC</th>
+            <th style="width:50px">Qty</th>
+            <th style="width:80px">Price</th>
+            <th style="width:80px">Discount</th>
+            <th style="width:90px">Taxable Val</th>
+            <th style="width:55px">GST %</th>
+            <th style="width:85px">GST Amt</th>
+            <th style="width:90px">Total</th>
+            <th class="no-print" style="width:36px">×</th>
+          </tr>
+        </thead>
+        <tbody id="items-body"></tbody>
+      </table>
+
+      <!-- Totals row -->
+      <div class="totals-section">
+        <div class="terms-bank">
+          <div class="section-label">Bank Details</div>
+          <p contenteditable="true" id="bank-details">Bank: Test Bank<br>A/C No: 1234567890<br>IFSC: TEST0001234</p>
+          <div class="section-label" style="margin-top:10px">Terms &amp; Conditions</div>
+          <p contenteditable="true" id="terms">1. Payment due within 15 days.<br>2. Subject to local jurisdiction.</p>
+        </div>
+        <div class="calculations">
+          <div class="calc-row"><span>Sub Total</span><span id="calc-subtotal">₹0.00</span></div>
+          <div class="calc-row"><span>CGST</span><span id="calc-cgst">₹0.00</span></div>
+          <div class="calc-row"><span>SGST</span><span id="calc-sgst">₹0.00</span></div>
+          <div class="calc-row grand-total"><span>Grand Total</span><span id="calc-total">₹0.00</span></div>
+        </div>
+      </div>
+
+      <!-- Amount in words -->
+      <div class="amount-in-words">
+        <span class="bold">Amount in Words: </span>
+        <span id="amount-words">Zero Rupees Only</span>
+      </div>
+
+      <!-- Signature -->
+      <div class="signature-section">
+        <div class="signature-box">
+          <p class="bold">For <span id="sig-company-name">Your Company Name</span></p>
+          <div class="sig-space"></div>
+          <p class="muted-line">Authorized Signatory</p>
+        </div>
+      </div>
+
+      <div class="computer-generated">
+        This is a computer generated invoice and does not require a signature.
+      </div>
+
+    </div>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>

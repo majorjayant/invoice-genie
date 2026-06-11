@@ -1,0 +1,201 @@
+:root {
+    --bg-color: #f3f4f6;
+    --canvas-bg: #ffffff;
+    --text-main: #111;
+    --text-muted: #6b7280;
+    --border-color: #c9ccd1;
+    --border-strong: #111;
+    --highlight: #f7f8f8;
+    --accent: #007185;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+
+body { background-color: var(--bg-color); color: var(--text-main); font-size: 12.5px; line-height: 1.45; }
+
+.toolbar { text-align: center; padding: 14px; background: #232f3e; position: sticky; top: 0; z-index: 100; }
+.btn { padding: 8px 16px; margin: 0 5px; border: 1px solid var(--border-color); border-radius: 4px; background: white; cursor: pointer; font-size: 14px; font-weight: 500; }
+.btn-primary { background: #ffd814; border-color: #fcd200; }
+.btn-primary:hover { background: #f7ca00; }
+.btn-danger { background: #fff; color: #cc0c39; border-color: #cc0c39; }
+.btn-danger:hover { background: #fce8ec; }
+
+.invoice-wrapper { display: flex; justify-content: center; padding: 30px 10px; }
+
+.invoice-canvas {
+    background: var(--canvas-bg);
+    width: 210mm;
+    min-height: 297mm;
+    padding: 12mm;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border: 1px solid var(--border-color);
+}
+
+/* Editable affordance */
+[contenteditable="true"] { outline: none; border-radius: 2px; transition: background .15s, box-shadow .15s; }
+[contenteditable="true"]:hover { background: #f3f8ff; }
+[contenteditable="true"]:focus { background: #eaf3ff; box-shadow: 0 0 0 1px var(--accent); }
+[contenteditable="true"]:empty:before { content: attr(placeholder); color: #a9a9a9; }
+
+/* Title band */
+.title-band {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-bottom: none;
+}
+
+/* Header grid */
+.header-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    border: 1px solid var(--border-color);
+}
+.company-cell { padding: 12px 14px; border-right: 1px solid var(--border-color); }
+.company-cell h2 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+.company-cell p { font-size: 12px; color: var(--text-main); margin-top: 2px; }
+.muted-line { color: var(--text-muted); font-size: 11.5px; }
+.lbl { display: inline-block; min-width: 50px; color: var(--text-muted); font-weight: 500; }
+
+.meta-cell { display: flex; flex-direction: column; }
+.meta-row {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    border-bottom: 1px solid var(--border-color);
+    min-height: 42px;
+}
+.meta-row:last-child { border-bottom: none; }
+.meta-key {
+    padding: 8px 10px;
+    font-weight: 600;
+    font-size: 12px;
+    background: var(--highlight);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+}
+.meta-val {
+    padding: 8px 10px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+}
+
+/* Billed to */
+.billed-to-box {
+    border: 1px solid var(--border-color);
+    border-top: none;
+    padding: 10px 14px;
+}
+.section-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+}
+.billed-to-box p { font-size: 12px; margin-top: 2px; }
+.bold { font-weight: 700; }
+
+/* Items table */
+.items-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11.5px;
+}
+.items-table th, .items-table td {
+    border: 1px solid var(--border-color);
+    padding: 7px 6px;
+    text-align: right;
+    vertical-align: top;
+}
+.items-table th {
+    background-color: var(--highlight);
+    text-align: center;
+    font-weight: 600;
+    font-size: 11px;
+}
+.items-table td:nth-child(2) { text-align: left; }
+.items-table td.center { text-align: center; }
+
+.btn-remove { background: transparent; color: #cc0c39; border: none; cursor: pointer; font-weight: bold; font-size: 14px; }
+
+/* Totals */
+.totals-section { display: flex; justify-content: space-between; gap: 12px; margin-top: 14px; page-break-inside: avoid; }
+.terms-bank { width: 60%; font-size: 11.5px; color: var(--text-main); }
+.terms-bank p { color: var(--text-muted); margin-top: 2px; }
+
+.calculations {
+    width: 38%;
+    border: 1px solid var(--border-color);
+    height: fit-content;
+    font-size: 12px;
+}
+.calc-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 7px 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+.calc-row:last-child { border-bottom: none; }
+.calc-row > span:first-child { color: var(--text-muted); }
+.grand-total { background-color: var(--highlight); font-weight: 700; font-size: 13.5px; }
+.grand-total > span:first-child { color: var(--text-main); }
+
+.amount-in-words {
+    font-size: 12px;
+    margin-top: 12px;
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    background: var(--highlight);
+}
+
+.signature-section { display: flex; justify-content: flex-end; margin-top: 24px; page-break-inside: avoid; }
+.signature-box { text-align: center; width: 220px; font-size: 12px; }
+.sig-space { height: 50px; }
+
+.computer-generated {
+    text-align: center;
+    margin-top: 28px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border-color);
+    font-size: 11px;
+    color: var(--text-muted);
+    font-style: italic;
+    letter-spacing: 0.3px;
+}
+
+/* Empty items hint */
+.empty-row td { text-align: center; padding: 18px; color: var(--text-muted); font-style: italic; }
+
+/* Print — @page margin set to 0 so the browser has NO space to render its
+   default header (date/title) and footer (URL/page-number).
+   Visual spacing is handled by padding on the invoice-canvas instead. */
+@page {
+    size: A4;
+    margin: 0;
+}
+
+@media print {
+    .no-print { display: none !important; }
+    body { background: white; -webkit-print-color-adjust: exact; print-color-adjust: exact; margin: 0; }
+    .invoice-wrapper { padding: 0; }
+    .invoice-canvas {
+        box-shadow: none;
+        width: 100%;
+        min-height: 297mm; /* A4 page height */
+        padding: 10mm;
+        border: none;
+        display: flex;
+        flex-direction: column;
+    }
+    .computer-generated {
+        margin-top: auto; /* pushes to the very bottom of the page */
+    }
+    [contenteditable="true"]:hover, [contenteditable="true"]:focus { background: transparent !important; box-shadow: none !important; }
+    [contenteditable="true"]:empty:before { content: ""; }
+}
