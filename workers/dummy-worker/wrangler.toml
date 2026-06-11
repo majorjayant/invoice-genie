@@ -1,0 +1,16 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# dummy-worker — Cloudflare Worker Configuration
+# ─────────────────────────────────────────────────────────────────────────────
+# Deploy command:  wrangler deploy
+# Login first:     wrangler login
+# ─────────────────────────────────────────────────────────────────────────────
+
+name = "dummy-worker"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+# Route: handles jayantarora.in/dummy* only
+# All other jayantarora.in/* traffic is untouched (passes to Cloudflare Pages)
+[[routes]]
+pattern = "jayantarora.in/dummy*"
+zone_name = "jayantarora.in"
