@@ -19,6 +19,12 @@ export default {
       return fetch(request); // Passthrough to primary domain site
     }
 
+    // Redirect /dummy to /dummy/ to resolve relative paths correctly
+    if (url.pathname === SUBPATH) {
+      url.pathname = SUBPATH + '/';
+      return Response.redirect(url.toString(), 301);
+    }
+
     // ── /dummy/* → Invoice Genie Pages ──────────────────────────────
     let targetPath = url.pathname.replace(SUBPATH, '');
     if (targetPath === '' || targetPath === '/') targetPath = '/app.html';
